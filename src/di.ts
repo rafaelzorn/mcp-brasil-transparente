@@ -5,11 +5,14 @@ import { DeputyExpenseRepository } from '@/repositories/DeputyExpenseRepository'
 import { DeputyExpenseService } from '@/services/DeputyExpenseService'
 import { ProposalRepository } from '@/repositories/ProposalRepository'
 import { ProposalService } from '@/services/ProposalService'
+import { ProposalProgressRepository } from '@/repositories/ProposalProgressRepository'
+import { ProposalProgressService } from '@/services/ProposalProgressService'
 
 export type ApplicationDependencies = {
   deputyService: DeputyService
   deputyExpenseService: DeputyExpenseService
   proposalService: ProposalService
+  proposalProgressService: ProposalProgressService
 }
 
 export function createApplicationDependencies(): ApplicationDependencies {
@@ -24,5 +27,8 @@ export function createApplicationDependencies(): ApplicationDependencies {
   const proposalRepository = new ProposalRepository()
   const proposalService = new ProposalService(proposalRepository)
 
-  return { deputyService, deputyExpenseService, proposalService }
+  const proposalProgressRepository = new ProposalProgressRepository()
+  const proposalProgressService = new ProposalProgressService(proposalProgressRepository)
+
+  return { deputyService, deputyExpenseService, proposalService, proposalProgressService }
 }

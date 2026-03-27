@@ -9,6 +9,8 @@ import {
   ProposalsFetcherResult,
   ApiProposalDetailsResponse,
   ProposalDetailsFetcherResult,
+  ApiProposalProgressesResponse,
+  ProposalProgressesFetcherResult,
 } from '@/types'
 
 export function transformDeputies(apiDeputies: ApiDeputiesResponse): DeputiesFetcherResult {
@@ -79,4 +81,13 @@ export function transformProposalDetails(apiProposal: ApiProposalDetailsResponse
     summary: apiProposal.ementa,
     urlDocument: apiProposal.urlInteiroTeor,
   }
+}
+
+export function transformProposalProgresses(apiProposalProgresses: ApiProposalProgressesResponse): ProposalProgressesFetcherResult {
+  return apiProposalProgresses.map((proposalProgress) => ({
+    statusSituation: proposalProgress.descricaoSituacao,
+    descriptionSituation: proposalProgress.descricaoTramitacao,
+    dispatch: proposalProgress.despacho,
+    dateTime: proposalProgress.dataHora,
+  }))
 }

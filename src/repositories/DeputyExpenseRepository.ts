@@ -2,8 +2,8 @@ import { FetchErrorException } from '@/exceptions/FetchErrorException'
 import { ApiDeputyExpensesResponse } from '@/types'
 
 export class DeputyExpenseRepository {
-  public async getDeputyExpenses(id: number, params: URLSearchParams): Promise<ApiDeputyExpensesResponse> {
-    const response = await fetch(`${process.env.API_URL}/deputados/${id}/despesas?${params}`)
+  public async getDeputyExpenses(deputyId: number, params: URLSearchParams): Promise<ApiDeputyExpensesResponse> {
+    const response = await fetch(`${process.env.API_URL}/deputados/${deputyId}/despesas?${params}`)
 
     if (!response.ok) {
       throw new FetchErrorException('Ops... Erro ao buscar despesas do deputado.')

@@ -25,7 +25,7 @@ export class DeputyExpenseTool {
           outras informações relevantes.
         `,
         inputSchema: z.object({
-          id: z
+          deputyId: z
             .number()
             .describe('ID do deputado para consulta'),
           year: z
@@ -50,10 +50,10 @@ export class DeputyExpenseTool {
           )
         },
       },
-      async ({ id, year, month }) => {
+      async ({ deputyId, year, month }) => {
         try {
           const deputyExpenses = await this.deputyExpenseService.getDeputyExpenses(
-            id,
+            deputyId,
             year,
             month,
           )

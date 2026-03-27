@@ -6,7 +6,7 @@ import { transformDeputyExpenses } from '@/transformers'
 export class DeputyExpenseService {
   constructor(private deputyExpenseRepository: DeputyExpenseRepository) {}
 
-  public async getDeputyExpenses(id: number, year?: number, month?: number): Promise<DeputyExpense[]> {
+  public async getDeputyExpenses(deputyId: number, year?: number, month?: number): Promise<DeputyExpense[]> {
     let page = 1
     let allDeputyExpenses: DeputyExpense[] = []
     let deputyExpenses: DeputyExpense[] = []
@@ -18,7 +18,7 @@ export class DeputyExpenseService {
         ...({ ordenarPor: 'dataDocumento', pagina: page.toString() })
       });
 
-      const apiDeputyExpenses = await this.deputyExpenseRepository.getDeputyExpenses(id, params)
+      const apiDeputyExpenses = await this.deputyExpenseRepository.getDeputyExpenses(deputyId, params)
 
       deputyExpenses = transformDeputyExpenses(apiDeputyExpenses)
 

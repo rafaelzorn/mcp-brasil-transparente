@@ -136,3 +136,21 @@ export type ProposalDetail = {
 }
 
 export type ProposalDetailsFetcherResult = ProposalDetail
+
+export type ApiProposalProgress = {
+  descricaoSituacao: string
+  descricaoTramitacao: string
+  despacho: string
+  dataHora: string
+}
+
+export type ApiProposalProgressesResponse = ApiProposalProgress[]
+
+export type ProposalProgress = {
+  statusSituation: string
+  descriptionSituation: string
+  dispatch: string
+  dateTime: string
+}
+
+export type ProposalProgressesFetcherResult = ProposalProgress[]
