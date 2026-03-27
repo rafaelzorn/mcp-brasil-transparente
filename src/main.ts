@@ -1,9 +1,6 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
-import dotenv from 'dotenv'
 import tools from '@/tools'
-
-dotenv.config()
 
 async function main(): Promise<void> {
   const server = new McpServer({

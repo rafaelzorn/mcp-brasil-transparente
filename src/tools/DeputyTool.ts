@@ -1,6 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 import { DeputyService } from '@/services/DeputyService'
+import { NotFoundException } from '@/exceptions/NotFoundException'
 
 export class DeputyTool {
   constructor(
@@ -14,7 +15,7 @@ export class DeputyTool {
     this.registerGetDeputiesTool()
   }
 
-  private async registerGetDeputiesTool(): Promise<void> {
+  private registerGetDeputiesTool(): void {
     this.server.registerTool(
       'get-deputies',
       {
@@ -64,6 +65,13 @@ export class DeputyTool {
             structuredContent: data,
           }
         } catch (error) {
+          if (error instanceof NotFoundException) {
+            return {
+              content: [{ type: 'text', text: error.message }],
+              structuredContent: {data: []},
+            }
+          }
+
           return {
             content: [{ type: 'text', text: 'Ops... Ocorreu um erro ao buscar os deputados.' }],
             structuredContent: {data: []},

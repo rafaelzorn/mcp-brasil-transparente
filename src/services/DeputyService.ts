@@ -1,13 +1,14 @@
 import { DeputyRepository } from '@/repositories/DeputyRepository'
 import { Deputy } from '@/types'
 import { DeputyEntity } from '@/entities/DeputyEntity'
+import { NotFoundException } from '@/exceptions/NotFoundException'
 
 export class DeputyService {
   constructor(private deputyRepository: DeputyRepository) {}
 
   public async getDeputies(name?: string, state?: string, party?: string): Promise<Deputy[]> {
     let page = 1
-    let allDeputies: DeputyEntity[] = []
+    let allDeputies: Deputy[] = []
     let deputies: DeputyEntity[] = []
 
     do {
@@ -24,6 +25,10 @@ export class DeputyService {
 
       page++
     } while (deputies.length > 0)
+
+    if (allDeputies.length === 0) {
+      throw new NotFoundException('Nenhum deputado encontrado.')
+    }
 
     return allDeputies
   }
