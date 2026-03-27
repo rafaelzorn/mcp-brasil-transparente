@@ -25,8 +25,8 @@ export class DeputyTool {
           Consulta deputados federais ou estaduais pelo nome, estado ou partido, retornando informações
           básicas como nome, partido e estado.
         `,
-				inputSchema: {
-					name: z
+				inputSchema: z.object({
+          name: z
 						.string()
 						.min(5)
 						.optional()
@@ -46,7 +46,9 @@ export class DeputyTool {
 						.describe(
 							"Sigla do partido para filtrar deputados (ex: PT, PSDB, PSOL)",
 						),
-				},
+        }).refine(
+          (data) => data.name !== undefined || data.state !== undefined || data.party !== undefined,
+        ),
 				outputSchema: {
 					data: z.array(
 						z.object({

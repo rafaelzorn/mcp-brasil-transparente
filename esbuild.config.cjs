@@ -7,7 +7,8 @@ esbuild
 		bundle: true,
 		platform: "node",
 		target: "node20",
-		format: "cjs",
+		format: "esm",
+		packages: "external",
 		sourcemap: true,
 		alias: {
 			"@": "./src",

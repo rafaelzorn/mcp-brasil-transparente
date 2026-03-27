@@ -1,8 +1,11 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import dotenv from "dotenv";
 import tools from "@/tools";
 
 async function main(): Promise<void> {
+	dotenv.config();
+
 	const server = new McpServer({
 		name: "mcp-brasil-transparente",
 		version: "1.0.0",

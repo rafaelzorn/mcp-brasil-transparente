@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import { DeputyExpenseRepository } from "@/repositories/DeputyExpenseRepository";
 import { DeputyRepository } from "@/repositories/DeputyRepository";
 import { ProposalProgressRepository } from "@/repositories/ProposalProgressRepository";
@@ -16,8 +15,6 @@ export type ApplicationDependencies = {
 };
 
 export function createApplicationDependencies(): ApplicationDependencies {
-	dotenv.config();
-
 	const deputyRepository = new DeputyRepository();
 	const deputyService = new DeputyService(deputyRepository);
 

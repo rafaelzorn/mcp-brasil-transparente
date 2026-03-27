@@ -3,8 +3,9 @@
 		"rootDir": "src",
 		"outDir": "./build",
 
-		"module": "commonjs",
-		"target": "ES2020",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"target": "ES2023",
 
 		"types": ["node"],
 
@@ -15,9 +16,8 @@
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
 
-		"baseUrl": "src",
 		"paths": {
-			"@/*": ["*"]
+			"@/*": ["./src/*"]
 		},
 
 		"esModuleInterop": true,
