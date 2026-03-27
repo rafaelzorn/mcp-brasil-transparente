@@ -1,7 +1,7 @@
 import { ProposalRepository } from '@/repositories/ProposalRepository'
-import { Proposal } from '@/types'
+import { Proposal, ProposalDetail } from '@/types'
 import { NotFoundException } from '@/exceptions/NotFoundException'
-import { transformProposals } from '@/transformers'
+import { transformProposals, transformProposalDetails } from '@/transformers'
 
 export class ProposalService {
   constructor(private proposalRepository: ProposalRepository) {}
@@ -32,5 +32,13 @@ export class ProposalService {
     }
 
     return allProposals
+  }
+
+  public async getProposal(id: number): Promise<ProposalDetail> {
+    const apiProposal = await this.proposalRepository.getProposal(id)
+
+    const proposal = transformProposalDetails(apiProposal)
+
+    return proposal
   }
 }

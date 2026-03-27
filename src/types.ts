@@ -116,3 +116,23 @@ export type Proposal = {
 }
 
 export type ProposalsFetcherResult = Proposal[]
+
+export type ApiProposalDetail = {
+  id: number
+  siglaTipo: string
+  numero: string
+  ano: string,
+  ementa: string
+  urlInteiroTeor: string
+}
+
+export type ApiProposalDetailsResponse = ApiProposalDetail
+
+export type ProposalDetail = {
+  id: number
+  proposal: string
+  summary: string
+  urlDocument: string
+}
+
+export type ProposalDetailsFetcherResult = ProposalDetail
