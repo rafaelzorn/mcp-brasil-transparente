@@ -15,7 +15,7 @@ export class DeputyExpenseService {
       const params = new URLSearchParams({
         ...(year && { ano: year.toString() }),
         ...(month && { mes: month.toString() }),
-        ...({ ordenarPor: 'mes', pagina: page.toString() })
+        ...({ ordenarPor: 'dataDocumento', pagina: page.toString() })
       });
 
       const apiDeputyExpenses = await this.deputyExpenseRepository.getDeputyExpenses(id, params)

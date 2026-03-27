@@ -95,3 +95,24 @@ export type DeputyExpense = {
 }
 
 export type DeputyExpensesFetcherResult = DeputyExpense[]
+
+export type ApiProposal = {
+  id: number
+  siglaTipo: string
+  codTipo: string
+  numero: string
+  ano: string
+  ementa: string
+  dataApresentacao: string
+}
+
+export type ApiProposalsResponse = ApiProposal[]
+
+export type Proposal = {
+  id: number
+  proposal: string
+  presentationDate: string
+  summary: string
+}
+
+export type ProposalsFetcherResult = Proposal[]

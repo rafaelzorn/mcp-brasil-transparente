@@ -4,7 +4,9 @@ import {
   ApiDeputyDetailsResponse,
   DeputyDetailsFetcherResult,
   ApiDeputyExpensesResponse,
-  DeputyExpensesFetcherResult
+  DeputyExpensesFetcherResult,
+  ApiProposalsResponse,
+  ProposalsFetcherResult
 } from '@/types'
 
 export function transformDeputies(apiDeputies: ApiDeputiesResponse): DeputiesFetcherResult {
@@ -56,5 +58,14 @@ export function transformDeputyExpenses(apiDeputyExpenses: ApiDeputyExpensesResp
     documentDate: deputyExpense.dataDocumento,
     documentValue: deputyExpense.valorDocumento,
     urlDocument: deputyExpense.urlDocumento
+  }))
+}
+
+export function transformProposals(apiProposals: ApiProposalsResponse): ProposalsFetcherResult {
+  return apiProposals.map((proposal) => ({
+    id: proposal.id,
+    proposal: `${proposal.siglaTipo} ${proposal.numero}/${proposal.ano}`,
+    presentationDate: proposal.dataApresentacao,
+    summary: proposal.ementa,
   }))
 }
