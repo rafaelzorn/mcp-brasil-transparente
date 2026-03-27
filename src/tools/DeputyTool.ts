@@ -1,11 +1,12 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 import { DeputyService } from '@/services/DeputyService'
-import { DeputyRepository } from '@/repositories/DeputyRepository'
-import { FetchErrorException } from '@/exceptions/FetchErrorException'
 
 export class DeputyTool {
-  constructor(private server: McpServer) {
+  constructor(
+    private server: McpServer,
+    private deputyService: DeputyService,
+  ) {
     this.registerTools()
   }
 
@@ -49,11 +50,8 @@ export class DeputyTool {
         },
       },
       async ({ name, state, party }) => {
-        const deputyRepository = new DeputyRepository()
-        const deputyService = new DeputyService(deputyRepository)
-
         try {
-          const deputies = await deputyService.getDeputies(
+          const deputies = await this.deputyService.getDeputies(
             name,
             state,
             party,
