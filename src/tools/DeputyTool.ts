@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 import { DeputyService } from '@/services/DeputyService'
 import { DeputyRepository } from '@/repositories/DeputyRepository'
+import { FetchErrorException } from '@/exceptions/FetchErrorException'
 
 export class DeputyTool {
   constructor(private server: McpServer) {
@@ -21,34 +22,52 @@ export class DeputyTool {
         inputSchema: {
           name: z
             .string()
+            .min(5)
             .optional()
             .describe('Nome para buscar os parlamentares'),
           state: z
             .string()
+            .min(2)
+            .max(2)
             .optional()
             .describe('Sigla do estado para buscar os parlamentares (ex: SP, RJ, MG, etc.)'),
           party: z
             .string()
+            .max(5)
             .optional()
             .describe('Sigla do partido para buscar os parlamentares (ex: PT, PSDB, PSOL, etc.)'),
-        }
+        },
+        outputSchema: {
+          data: z.array(
+            z.object({
+              id: z.number(),
+              name: z.string(),
+              party: z.string(),
+              state: z.string(),
+            }),
+          )
+        },
       },
       async ({ name, state, party }) => {
         const deputyRepository = new DeputyRepository()
         const deputyService = new DeputyService(deputyRepository)
 
-        const deputies = await deputyService.getDeputies(
-          name,
-          state,
-          party,
-        )
+        try {
+          const data = await deputyService.getDeputies(
+            name,
+            state,
+            party,
+          )
 
-        const deputiesText = deputies
-          .map((deputy) => JSON.stringify(deputy))
-          .join('\n')
-
-        return {
-          content: [{ type: 'text', text: deputiesText}]
+          return {
+            content: [{ type: 'text', text: JSON.stringify(data, null, 2) }],
+            structuredContent: data,
+          }
+        } catch (error) {
+          return {
+            content: [{ type: 'text', text: 'Ops... Ocorreu um erro ao buscar os deputados.' }],
+            structuredContent: {data: []},
+          }
         }
       }
     )
