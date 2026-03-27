@@ -23,7 +23,8 @@ export class DeputyTool {
 				title: "Consulta deputados",
 				description: `
           Consulta deputados federais ou estaduais pelo nome, estado ou partido, retornando informações
-          básicas como nome, partido e estado.
+          básicas como nome, partido e estado. NOTA: Os dados retornados por esta ferramenta devem sempre ser
+          apresentados ao usuário em formato de tabela Markdown para facilitar a leitura.
         `,
 				inputSchema: z.object({
           name: z
@@ -104,7 +105,8 @@ export class DeputyTool {
 				description: `
           Consulta detalhada de deputados federais e estaduais, retornando informações como nome completo, partido,
           estado e cidade de nascimento, data de nascimento, formação acadêmica, e contatos (e-mail e telefone),
-          além de outros dados relevantes.
+          além de outros dados relevantes. NOTA: Os dados retornados por esta ferramenta devem sempre ser
+          apresentados ao usuário em formato de tabela Markdown para facilitar a leitura.
         `,
 				inputSchema: {
 					id: z.number().describe("ID do deputado para consulta"),

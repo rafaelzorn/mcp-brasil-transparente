@@ -23,7 +23,8 @@ export class ProposalTool {
 				title: "Consulta proposições de um deputado",
 				description: `
           Consulta proposições de um deputado, retornando informações como data de apresentação, número, ano, ementa, e
-          outras informações relevantes.
+          outras informações relevantes. NOTA: Os dados retornados por esta ferramenta devem sempre ser
+          apresentados ao usuário em formato de tabela Markdown para facilitar a leitura.
         `,
 				inputSchema: {
 					deputyId: z.number().describe("ID do deputado para consulta"),
@@ -84,7 +85,9 @@ export class ProposalTool {
 				title: "Consulta proposição",
 				description: `
           Consulta detalhada de proposições legislativas, retornando informações como tipo e número da proposição,
-          ementa, data de apresentação e a URL para acesso ao documento completo (inteiro teor).
+          ementa, data de apresentação e a URL para acesso ao documento completo (inteiro teor). NOTA: Os dados
+          retornados por esta ferramenta devem sempre ser apresentados ao usuário em formato de tabela Markdown para
+          facilitar a leitura.
         `,
 				inputSchema: {
 					id: z.number().describe("ID do deputado para consulta"),
