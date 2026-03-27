@@ -21,9 +21,12 @@ export class ProposalProgressTool {
 			{
 				title: "Consulta tramitações de uma proposição",
 				description: `
-          Consulta a tramitação de uma proposição legislativa, retornando informações como data e hora dos eventos,
-          situação atual, descrição das movimentações e outros detalhes relevantes do andamento. NOTA: Os dados
-          retornados por esta ferramenta devem sempre ser apresentados ao usuário em formato de tabela Markdown para
+          Consulta a tramitação de uma proposição legislativa, retornando informações como data e   hora dos eventos,
+          situação atual, descrição das movimentações e outros detalhes relevantes do andamento.
+
+          **IMPORTANTE**: Caso não encontre tramitações, retorne apenas a mensagem "Nenhuma tramitação encontrada para a proposição."
+
+          **NOTA**: Os dados retornados devem sempre ser apresentados ao usuário em formato de tabela Markdown para
           facilitar a leitura.
         `,
 				inputSchema: {

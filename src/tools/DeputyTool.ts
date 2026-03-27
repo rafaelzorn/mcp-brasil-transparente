@@ -23,33 +23,42 @@ export class DeputyTool {
 				title: "Consulta deputados",
 				description: `
           Consulta deputados federais ou estaduais pelo nome, estado ou partido, retornando informações
-          básicas como nome, partido e estado. NOTA: Os dados retornados por esta ferramenta devem sempre ser
-          apresentados ao usuário em formato de tabela Markdown para facilitar a leitura.
+          básicas como nome, partido e estado.
+
+          **IMPORTANTE**: Caso não encontre deputados, retorne apenas a mensagem "Nenhum deputado encontrado."
+
+          **NOTA**: Os dados retornados devem sempre ser apresentados ao usuário em formato de tabela Markdown
+          para facilitar a leitura.
         `,
-				inputSchema: z.object({
-          name: z
-						.string()
-						.min(5)
-						.optional()
-						.describe("Nome completo ou parcial do deputado para busca"),
-					state: z
-						.string()
-						.min(2)
-						.max(2)
-						.optional()
-						.describe(
-							"Sigla do estado para filtrar deputados (ex: SP, RJ, MG)",
-						),
-					party: z
-						.string()
-						.max(5)
-						.optional()
-						.describe(
-							"Sigla do partido para filtrar deputados (ex: PT, PSDB, PSOL)",
-						),
-        }).refine(
-          (data) => data.name !== undefined || data.state !== undefined || data.party !== undefined,
-        ),
+				inputSchema: z
+					.object({
+						name: z
+							.string()
+							.min(5)
+							.optional()
+							.describe("Nome completo ou parcial do deputado para busca"),
+						state: z
+							.string()
+							.min(2)
+							.max(2)
+							.optional()
+							.describe(
+								"Sigla do estado para filtrar deputados (ex: SP, RJ, MG)",
+							),
+						party: z
+							.string()
+							.max(5)
+							.optional()
+							.describe(
+								"Sigla do partido para filtrar deputados (ex: PT, PSDB, PSOL)",
+							),
+					})
+					.refine(
+						(data) =>
+							data.name !== undefined ||
+							data.state !== undefined ||
+							data.party !== undefined,
+					),
 				outputSchema: {
 					data: z.array(
 						z.object({
@@ -105,8 +114,12 @@ export class DeputyTool {
 				description: `
           Consulta detalhada de deputados federais e estaduais, retornando informações como nome completo, partido,
           estado e cidade de nascimento, data de nascimento, formação acadêmica, e contatos (e-mail e telefone),
-          além de outros dados relevantes. NOTA: Os dados retornados por esta ferramenta devem sempre ser
-          apresentados ao usuário em formato de tabela Markdown para facilitar a leitura.
+          além de outros dados relevantes.
+
+          **IMPORTANTE**: Caso não encontre o deputado, retorne apenas a mensagem "Deputado não encontrado."
+
+          **NOTA**: Os dados retornados devem sempre ser apresentados ao usuário em formato de tabela Markdown para
+          facilitar a leitura.
         `,
 				inputSchema: {
 					id: z.number().describe("ID do deputado para consulta"),

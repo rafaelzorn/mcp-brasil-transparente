@@ -22,8 +22,12 @@ export class DeputyExpenseTool {
 				title: "Consulta despesas de um deputado",
 				description: `
           Consulta despesas de um deputado, retornando informações como data, valor, fornecedor, tipo de despesa, e
-          outras informações relevantes. NOTA: Os dados retornados por esta ferramenta devem sempre ser
-          apresentados ao usuário em formato de tabela Markdown para facilitar a leitura.
+          outras informações relevantes.
+
+          **IMPORTANTE**: Caso não encontre despesas, retorne apenas a mensagem "Nenhuma despesa encontrada para o deputado."
+
+          **NOTA**: Os dados retornados devem sempre ser apresentados ao usuário em formato de tabela Markdown para
+          facilitar a leitura.
         `,
 				inputSchema: z
 					.object({
