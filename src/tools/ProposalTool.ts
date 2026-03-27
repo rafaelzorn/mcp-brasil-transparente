@@ -112,7 +112,7 @@ export class ProposalTool {
           }
 
           return {
-            content: [{ type: 'text', text: 'Ops... Ocorreu um erro ao consultar detalhes do deputado.' }],
+            content: [{ type: 'text', text: 'Ops... Ocorreu um erro ao consultar detalhes da proposição.' }],
             structuredContent: {},
           }
         }
