@@ -124,6 +124,12 @@ export type ApiProposalDetail = {
   ano: string,
   ementa: string
   urlInteiroTeor: string
+  statusProposicao: {
+    dataHora: string
+    descricaoSituacao: string
+    descricaoTramitacao: string
+    despacho: string
+  }
 }
 
 export type ApiProposalDetailsResponse = ApiProposalDetail
@@ -133,6 +139,12 @@ export type ProposalDetail = {
   proposal: string
   summary: string
   urlDocument: string
+  statusProposal: {
+    dateTime: string
+    statusSituation: string
+    descriptionSituation: string
+    dispatch: string
+  }
 }
 
 export type ProposalDetailsFetcherResult = ProposalDetail

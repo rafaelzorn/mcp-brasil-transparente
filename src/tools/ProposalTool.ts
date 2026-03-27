@@ -93,6 +93,12 @@ export class ProposalTool {
           proposal: z.string().describe('Nome da proposição'),
           summary: z.string().describe('Ementa da proposição'),
           urlDocument: z.string().describe('URL do documento da proposição'),
+          statusProposal: z.object({
+            dateTime: z.string().describe('Data e hora da situação atual da proposição'),
+            statusSituation: z.string().describe('Situação atual da proposição'),
+            descriptionSituation: z.string().describe('Descrição da situação atual da proposição'),
+            dispatch: z.string().describe('Despacho da situação atual da proposição'),
+          }),
         }
       },
       async ({ id }) => {

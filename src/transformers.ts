@@ -75,11 +75,19 @@ export function transformProposals(apiProposals: ApiProposalsResponse): Proposal
 }
 
 export function transformProposalDetails(apiProposal: ApiProposalDetailsResponse): ProposalDetailsFetcherResult {
+  const statusProposal = apiProposal.statusProposicao
+
   return {
     id: apiProposal.id,
     proposal: `${apiProposal.siglaTipo} ${apiProposal.numero}/${apiProposal.ano}`,
     summary: apiProposal.ementa,
     urlDocument: apiProposal.urlInteiroTeor,
+    statusProposal: {
+      dateTime: statusProposal.dataHora,
+      statusSituation: statusProposal.descricaoSituacao,
+      descriptionSituation: statusProposal.descricaoTramitacao,
+      dispatch: statusProposal.despacho,
+    },
   }
 }
 
