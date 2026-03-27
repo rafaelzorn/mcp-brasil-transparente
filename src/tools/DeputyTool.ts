@@ -19,25 +19,28 @@ export class DeputyTool {
     this.server.registerTool(
       'get-deputies',
       {
-        title: 'Busca deputados',
-        description: 'Busca os deputados pelo nome, estado ou partido',
+        title: 'Consulta deputados',
+        description: `
+          Consulta deputados federais ou estaduais pelo nome, estado ou partido, retornando informações
+          básicas como nome, partido e estado.
+        `,
         inputSchema: {
           name: z
             .string()
             .min(5)
             .optional()
-            .describe('Nome para buscar os parlamentares'),
+            .describe('Nome completo ou parcial do deputado para busca'),
           state: z
             .string()
             .min(2)
             .max(2)
             .optional()
-            .describe('Sigla do estado para buscar os parlamentares (ex: SP, RJ, MG, etc.)'),
+            .describe('Sigla do estado para filtrar deputados (ex: SP, RJ, MG)'),
           party: z
             .string()
             .max(5)
             .optional()
-            .describe('Sigla do partido para buscar os parlamentares (ex: PT, PSDB, PSOL, etc.)'),
+            .describe('Sigla do partido para filtrar deputados (ex: PT, PSDB, PSOL)'),
         },
         outputSchema: {
           data: z.array(
