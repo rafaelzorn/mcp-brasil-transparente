@@ -1,7 +1,7 @@
 import { DeputyRepository } from '@/repositories/DeputyRepository'
-import { Deputy } from '@/types'
-import { DeputyEntity } from '@/entities/DeputyEntity'
+import { Deputy, DeputyDetail } from '@/types'
 import { NotFoundException } from '@/exceptions/NotFoundException'
+import { transformDeputies, transformDeputyDetails } from '@/transformers'
 
 export class DeputyService {
   constructor(private deputyRepository: DeputyRepository) {}
@@ -9,7 +9,7 @@ export class DeputyService {
   public async getDeputies(name?: string, state?: string, party?: string): Promise<Deputy[]> {
     let page = 1
     let allDeputies: Deputy[] = []
-    let deputies: DeputyEntity[] = []
+    let deputies: Deputy[] = []
 
     do {
       const params = new URLSearchParams({
@@ -19,9 +19,11 @@ export class DeputyService {
         ...({ ordenarPor: 'nome', pagina: page.toString() })
       });
 
-      deputies = await this.deputyRepository.getDeputies(params)
+      const apiDeputies = await this.deputyRepository.getDeputies(params)
 
-      allDeputies.push(...deputies.map(DeputyEntity.toJSON))
+      deputies = transformDeputies(apiDeputies)
+
+      allDeputies.push(...deputies)
 
       page++
     } while (deputies.length > 0)
@@ -31,5 +33,13 @@ export class DeputyService {
     }
 
     return allDeputies
+  }
+
+  public async getDeputy(id: number): Promise<DeputyDetail> {
+    const apiDeputy = await this.deputyRepository.getDeputy(id)
+
+    const deputy = transformDeputyDetails(apiDeputy)
+
+    return deputy
   }
 }
