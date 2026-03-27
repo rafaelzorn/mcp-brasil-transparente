@@ -53,11 +53,13 @@ export class DeputyTool {
         const deputyService = new DeputyService(deputyRepository)
 
         try {
-          const data = await deputyService.getDeputies(
+          const deputies = await deputyService.getDeputies(
             name,
             state,
             party,
           )
+
+          const data = { data:deputies }
 
           return {
             content: [{ type: 'text', text: JSON.stringify(data, null, 2) }],
