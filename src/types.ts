@@ -73,3 +73,25 @@ export type DeputyDetail = {
 }
 
 export type DeputyDetailsFetcherResult = DeputyDetail
+
+export type ApiDeputyExpense = {
+  tipoDespesa: string
+  nomeFornecedor: string
+  cnpjCpfFornecedor: string
+  dataDocumento: string
+  valorDocumento: number
+  urlDocumento: string
+}
+
+export type ApiDeputyExpensesResponse = ApiDeputyExpense[]
+
+export type DeputyExpense = {
+  typeExpense: string
+  providerName: string
+  providerCnpjCpf: string
+  documentDate: string
+  documentValue: number
+  urlDocument: string
+}
+
+export type DeputyExpensesFetcherResult = DeputyExpense[]

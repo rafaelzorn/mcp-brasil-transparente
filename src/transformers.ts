@@ -1,4 +1,11 @@
-import { ApiDeputiesResponse, DeputiesFetcherResult, ApiDeputyDetailsResponse, DeputyDetailsFetcherResult } from '@/types'
+import {
+  ApiDeputiesResponse,
+  DeputiesFetcherResult,
+  ApiDeputyDetailsResponse,
+  DeputyDetailsFetcherResult,
+  ApiDeputyExpensesResponse,
+  DeputyExpensesFetcherResult
+} from '@/types'
 
 export function transformDeputies(apiDeputies: ApiDeputiesResponse): DeputiesFetcherResult {
   return apiDeputies.map((deputy) => ({
@@ -39,4 +46,15 @@ export function transformDeputyDetails(apiDeputy: ApiDeputyDetailsResponse): Dep
     birthCity: apiDeputy.municipioNascimento,
     education: apiDeputy.escolaridade,
   }
+}
+
+export function transformDeputyExpenses(apiDeputyExpenses: ApiDeputyExpensesResponse): DeputyExpensesFetcherResult {
+  return apiDeputyExpenses.map((deputyExpense) => ({
+    typeExpense: deputyExpense.tipoDespesa,
+    providerName: deputyExpense.nomeFornecedor,
+    providerCnpjCpf: deputyExpense.cnpjCpfFornecedor,
+    documentDate: deputyExpense.dataDocumento,
+    documentValue: deputyExpense.valorDocumento,
+    urlDocument: deputyExpense.urlDocumento
+  }))
 }
