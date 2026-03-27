@@ -1,36 +1,43 @@
-import { DeputyExpenseRepository } from '@/repositories/DeputyExpenseRepository'
-import { DeputyExpense } from '@/types'
-import { NotFoundException } from '@/exceptions/NotFoundException'
-import { transformDeputyExpenses } from '@/transformers'
+import { NotFoundException } from "@/exceptions/NotFoundException";
+import type { DeputyExpenseRepository } from "@/repositories/DeputyExpenseRepository";
+import { transformDeputyExpenses } from "@/transformers";
+import type { DeputyExpense } from "@/types";
 
 export class DeputyExpenseService {
-  constructor(private deputyExpenseRepository: DeputyExpenseRepository) {}
+	constructor(private deputyExpenseRepository: DeputyExpenseRepository) {}
 
-  public async getDeputyExpenses(deputyId: number, year?: number, month?: number): Promise<DeputyExpense[]> {
-    let page = 1
-    let allDeputyExpenses: DeputyExpense[] = []
-    let deputyExpenses: DeputyExpense[] = []
+	public async getDeputyExpenses(
+		deputyId: number,
+		year?: number,
+		month?: number,
+	): Promise<DeputyExpense[]> {
+		let page = 1;
+		const allDeputyExpenses: DeputyExpense[] = [];
+		let deputyExpenses: DeputyExpense[] = [];
 
-    do {
-      const params = new URLSearchParams({
-        ...(year && { ano: year.toString() }),
-        ...(month && { mes: month.toString() }),
-        ...({ ordenarPor: 'dataDocumento', pagina: page.toString() })
-      });
+		do {
+			const params = new URLSearchParams({
+				...(year && { ano: year.toString() }),
+				...(month && { mes: month.toString() }),
+				...{ ordenarPor: "dataDocumento", pagina: page.toString() },
+			});
 
-      const apiDeputyExpenses = await this.deputyExpenseRepository.getDeputyExpenses(deputyId, params)
+			const apiDeputyExpenses =
+				await this.deputyExpenseRepository.getDeputyExpenses(deputyId, params);
 
-      deputyExpenses = transformDeputyExpenses(apiDeputyExpenses)
+			deputyExpenses = transformDeputyExpenses(apiDeputyExpenses);
 
-      allDeputyExpenses.push(...deputyExpenses)
+			allDeputyExpenses.push(...deputyExpenses);
 
-      page++
-    } while (deputyExpenses.length > 0)
+			page++;
+		} while (deputyExpenses.length > 0);
 
-    if (allDeputyExpenses.length === 0) {
-      throw new NotFoundException('Nenhuma despesa encontrada para o deputado.')
-    }
+		if (allDeputyExpenses.length === 0) {
+			throw new NotFoundException(
+				"Nenhuma despesa encontrada para o deputado.",
+			);
+		}
 
-    return allDeputyExpenses
-  }
+		return allDeputyExpenses;
+	}
 }

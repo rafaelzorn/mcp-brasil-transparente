@@ -1,22 +1,22 @@
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
-import tools from '@/tools'
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import tools from "@/tools";
 
 async function main(): Promise<void> {
-  const server = new McpServer({
-    name: 'mcp-brasil-transparente',
-    version: '1.0.0',
-  })
+	const server = new McpServer({
+		name: "mcp-brasil-transparente",
+		version: "1.0.0",
+	});
 
-  tools(server)
+	tools(server);
 
-  const transport = new StdioServerTransport()
-  await server.connect(transport)
+	const transport = new StdioServerTransport();
+	await server.connect(transport);
 
-  console.error('MCP Brasil Transparente Server is running on stdio')
+	console.error("MCP Brasil Transparente Server is running on stdio");
 }
 
 main().catch((error) => {
-  console.error('Fatal error in main():', error)
-  process.exit(1)
-})
+	console.error("Fatal error in main():", error);
+	process.exit(1);
+});
