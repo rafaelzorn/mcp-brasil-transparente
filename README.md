@@ -47,13 +47,13 @@ path according to your local environment.
 | `get-deputy` | Deputy details | `id` (number, required) |
 | `get-deputy-expenses` | Expenses for a specific deputy | `deputyId` (number, required), `year` (number), `month` (number) |
 | `get-proposals` | Deputy proposals | `deputyId` (number, required), `year` (number, required) |
-| `get-proposal` | Proposal details | `id` (number, required) |
+| `get-proposal` | Proposal details | `id` (number, required) |What is Deputy Hattem’s email address?
 | `get-proposal-progresses` | Proposal progresses | `proposalId` (number, required) |
 
 ## Example Queries
 
-- "Me informe os detalhes do deputado Hattem"
-- "Qual o e-mail do deputado Hattem"
-- "Me informe as despesas do deputado Hattem em março de 2026"
-- "Me de os detalhes da proposição PL 14/2019 do deputado Hattem"
-- "Me de as ultimas tramitações da proposição PL 14/2019  do deputado Hattem"
+- "Tell me the details about Deputy Hattem"
+- "What is Deputy Hattem’s email address?"
+- "Tell me Deputy Hattem’s expenses in March 2026"
+- "Give me the details of bill PL 14/2019 by Deputy Hattem"
+- "Give me the latest proceedings of bill PL 14/2019 by Deputy Hattem"
